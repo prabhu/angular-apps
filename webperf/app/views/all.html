@@ -1,25 +1,39 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4>All Response data</h4>
+            <h4>All Response data <span ng-show="predicate"> - Sorted by {{ predicate | uppercase }} <span ng-show="reverse">(reverse)</span> </span></h4>
             <span ng-show="{{ responseDatas.length == 0 }}">No data. <a class="btn btn-primary" ng-href="#/new">New</a></span>
             <div class="table-responsive" ng-show="{{ responseDatas.length }}">
                 <table id="mytable" class="table table-bordred table-striped">
                     <thead>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>URL</th>
-                        <th>Time</th>
+                        <th><a href="" ng-click="predicate = 'id'; reverse=false">ID</a>
+    (<a href="" ng-click="predicate = '-id'; reverse=true">^</a>)</th>
+                        <th><a href="" ng-click="predicate = 'date'; reverse=false">Date</a>
+    (<a href="" ng-click="predicate = '-date'; reverse=true">^</a>)</th>
+                        <th><a href="" ng-click="predicate = 'url'; reverse=false">URL</a>
+    (<a href="" ng-click="predicate = '-url'; reverse=true">^</a>)</th>
+                        <th><a href="" ng-click="predicate = 'time'; reverse=false">Time</a>
+    (<a href="" ng-click="predicate = '-time'; reverse=true">^</a>)</th>
                         <th>Edit</th>
+                        <th>Chart</th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="responseData in responseDatas">
+                        <tr ng-repeat="responseData in responseDatas | orderBy:predicate | paginate:currentPage*pageSize | limitTo:pageSize">
                         <td>{{ responseData.id }}</td><td>{{ responseData.date }}</td><td ng-bind-html="responseData.url | linky"></td><td>{{ responseData.time }}</td>
                         <td><a class="btn btn-xs" data-title="Delete" data-toggle="modal" ng-href="#/edit/{{ responseData.id }}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a class="btn btn-xs" data-title="Chart" data-toggle="modal" ng-href="#/view-stats/{{ responseData.id }}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-stats"></span></a></td>
                         </tr>
                     </tbody>
                 </table>
-                <span class="pull-right"><a class="btn btn-primary" ng-href="#/new">Add</a></span>
+                <span class="pull-right">
+                    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                        Previous
+                    </button>
+                    {{currentPage+1}}/{{numberOfPages()}}
+                    <button ng-disabled="currentPage >= responseDatas.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                        Next
+                    </button>
+                </span>
             </div>
         </div>
     </div>

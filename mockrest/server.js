@@ -18,8 +18,10 @@ var allowCrossDomain = function(req, res, next) {
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(allowCrossDomain);
+
 app.get('/responseData', responseData.findAll);
 app.get('/responseData/:id', responseData.findById);
+app.get('/responseDataStats/:id', responseData.statsById);
 app.post('/responseData', responseData.addResponseData);
 app.post('/responseData/:id', responseData.updateResponseData);
 app.delete('/responseData/:id', responseData.deleteResponseData);

@@ -1,14 +1,8 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name webperfApp.directives:sameScopeInclude
- * @description
- * # sameScopeInclude
- * Include a template in the same scope
- */
 var directives = angular.module('webperfApp.directives', []);
 
+// Automatically prefix http://www for input fields
 directives.directive('httpPrefix', function() {
     return {
         restrict: 'A',
@@ -23,7 +17,7 @@ directives.directive('httpPrefix', function() {
                     } else {
                         return value;
                     }
-                } else {
+                } else { // Without www textfield with type=url will not work
                     return 'http://www.';
                 }
             }

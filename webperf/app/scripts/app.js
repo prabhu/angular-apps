@@ -16,6 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'highcharts-ng',
+    'webperfApp.filters',
     'webperfApp.directives',
     'webperfApp.services',
     'webperfApp.controllers'
@@ -37,6 +39,15 @@ angular
         resolve: {
           responseData: function(ResponseDataLoader) {
             return new ResponseDataLoader();
+          }
+        }
+      })
+      .when('/view-stats/:id', {
+        templateUrl: 'views/view-stats.html',
+        controller: 'DisplayStatsCtrl',
+        resolve: {
+          responseDatas: function(ResponseDataStatsLoader) {
+            return new ResponseDataStatsLoader();
           }
         }
       })

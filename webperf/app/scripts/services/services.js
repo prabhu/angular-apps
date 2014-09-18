@@ -7,6 +7,10 @@ services.factory('ResponseData', ['$resource', function ($resource) {
     return $resource('http://localhost:8080/responseData/:id', {id: '@id'});
 }]);
 
+services.factory('ResponseDataStats', ['$resource', function ($resource) {
+    return $resource('http://localhost:8080/responseDataStats/:id', {id: '@id'});
+}]);
+
 // Demonstrating promise support in angular
 services.factory('AllResponseData', ['ResponseData', '$q', function (ResponseData, $q) {
 
@@ -29,6 +33,21 @@ services.factory('ResponseDataLoader', ['ResponseData', '$route', '$q', function
         var defCall = $q.defer();
         // Simillar to above but we call get instead of query.
         ResponseData.get({id: id}, function (data) {
+            defCall.resolve(data);
+        }, function () {
+            defCall.reject('Unable to get the response data for' + id);
+        });
+        return defCall.promise;
+    };
+}]);
+
+services.factory('ResponseDataStatsLoader', ['ResponseDataStats', '$route', '$q', function(ResponseDataStats, $route, $q) {
+    // Get the current id from the route
+    var id = $route.current.params.id;
+    return function() {
+        var defCall = $q.defer();
+        // Simillar to above but we call get instead of query.
+        ResponseDataStats.query({id: id}, function (data) {
             defCall.resolve(data);
         }, function () {
             defCall.reject('Unable to get the response data for' + id);
