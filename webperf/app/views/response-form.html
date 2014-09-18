@@ -1,0 +1,29 @@
+<h2><span ng-hide="{{ responseData.id }}">Add</span><span ng-show="{{ responseData.id }}">Edit</span> response data</h2>
+<form name="responseInputForm" class="form-horizontal" ng-submit="save()">
+     <div class="form-group">
+        <label for="data" class="col-sm-3 control-label">Date</label>
+        <div class="col-sm-9">
+            <input id="data" type="date" placeholder="dd-MM-yyyy" class="input-lg" required ng-model="responseData.date"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="url" class="col-sm-3 control-label">URL</label>
+        <div class="col-sm-9">
+            <input class="input-lg" type="url" required id="url" ng-model="responseData.url" http-prefix></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="time" class="col-sm-3 control-label">Response time</label>
+        <div class="col-sm-9">
+            <input class="input-lg" type="number" required  id="time" ng-model="responseData.time"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12 text-right">
+            <button class="btn btn-primary" ng-hide="{{ responseData.id }}">Create</button>
+            <button class="btn btn-primary" ng-show="{{ responseData.id }}">Edit</button>
+            <button class="btn btn-primary btn-danger" ng-show="{{ responseData.id }}" ng-click="remove()">Delete</button>
+        </div>
+    </div>
+
+</form>
