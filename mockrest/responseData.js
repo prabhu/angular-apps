@@ -8,7 +8,7 @@ function seed() {
     }
     var url = ['http://www.google.com', 'http://www.nccgroup.com'];
     for (var i=1; i <= 2000; i++) {
-        responseDatas[i] = {id: i, date: moment().format('YYYY-MM-DD'), url: url[random(0,1)], time: random(10, 500), created: new Date()}
+        responseDatas[i] = {id: i, date: moment().subtract(random(1, 20), 'days').format('YYYY-MM-DD'), url: url[random(0,1)], time: random(10, 500), created: new Date()}
     }
 }
 seed();

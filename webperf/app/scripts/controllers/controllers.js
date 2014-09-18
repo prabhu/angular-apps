@@ -38,7 +38,7 @@ app.controller('DisplayStatsCtrl', ['$scope', 'responseDatas', function($scope, 
     $scope.predicate = 'id';
     $scope.reverse = false;
     $scope.currentPage = 0;
-    $scope.pageSize = 20;
+    $scope.pageSize = 10;
     $scope.url = null;
     $scope.range = 100;
     $scope.numberOfPages=function(){
@@ -63,18 +63,26 @@ app.controller('DisplayStatsCtrl', ['$scope', 'responseDatas', function($scope, 
         }
         $scope.chartConfig = {
             chart: {
-                type: 'column'
+                type: 'column',
+                borderWidth: 0
             },
-
             xAxis: {
-                categories: categories
+                categories: categories,
+                title: {
+                    text: 'Page response time (ms)'
+                }
             },
-
+            yAxis: {
+                title: {
+                    text: 'Number of items'
+                }
+            },
             plotOptions: {
                 column: {
-                    groupPadding: 0,
-                    pointPadding: 0,
-                    borderWidth: 0
+                    groupPadding: 10,
+                    pointPadding:0,
+                    borderWidth: 5,
+                    color: '#486D98' // CoLearnr blue!
                 }
             },
             title: {
@@ -111,6 +119,7 @@ app.controller('CreateEditCtrl', ['$scope', '$location', 'responseData', 'Respon
     };
 }]);
 
+// This is not needed anymore. This is cleverly merged with CreateEditCtrl
 app.controller('CreateCtrl', ['$scope', '$location', 'ResponseData', function($scope, $location, ResponseData) {
     $scope.responseData = new ResponseData({ created: new Date() });
     // After saving go home

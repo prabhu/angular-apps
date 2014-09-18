@@ -1,3 +1,14 @@
+<form name="responseInputForm" class="form-horizontal" ng-submit="save()">
+     <div class="form-group">
+        <label for="range" class="col-sm-3 control-label">Range</label>
+        <div class="col-sm-9">
+            <input type="number" id="range" ng-model="range" ng-change="redraw()" required></input>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <highchart id="chart1" config="chartConfig" class="col-md-10"></highchart>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -16,11 +27,11 @@
                     </tbody>
                 </table>
                 <span class="pull-right">
-                    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                    <button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
                         Previous
                     </button>
-                    {{currentPage+1}}/{{numberOfPages()}}
-                    <button ng-disabled="currentPage >= responseDatas.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                    &nbsp;{{currentPage+1}} / {{numberOfPages()}}&nbsp;
+                    <button class="btn btn-default" ng-disabled="currentPage >= responseDatas.length/pageSize - 1" ng-click="currentPage=currentPage+1">
                         Next
                     </button>
                 </span>
@@ -28,16 +39,6 @@
         </div>
     </div>
 </div>
-<form name="responseInputForm" class="form-horizontal" ng-submit="save()">
-     <div class="form-group">
-        <label for="range" class="col-sm-3 control-label">Range</label>
-        <div class="col-sm-9">
-            <input type="number" id="range" ng-model="range" ng-change="redraw()" required></input>
-        </div>
-    </div>
-</form>
-<div class="row">
-    <highchart id="chart1" config="chartConfig" class="col-md-10"></highchart>
-</div>
+
 
 
